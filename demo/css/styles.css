@@ -1,0 +1,68 @@
+﻿/***************************
+Reset
+********/		
+body{
+	margin: 0;
+	padding: 0;
+	zoom: 1;
+}
+ul,ol,p{
+	margin: 0; padding: 0;
+}
+a{
+	outline: 0 none;
+	text-decoration: none;
+}
+/***************************
+Generals
+********/		
+.table{
+	display: table;
+}
+.table_cell{
+	display: table-cell;
+}
+.centered{
+	margin: 0 auto;
+}
+.table_cell.centered{
+	vertical-align: middle;
+}
+.clear{
+	clear:both;
+}
+
+/***************************
+Site
+**********/
+body{
+}
+/***************************
+Screen: Wheels
+********/		
+div.ui-page{
+	position: static;
+}
+.ui-mobile [data-role=page]{
+	position: static;
+}
+.ipad_page{
+	background: white url('../images/pattern.gif') repeat;
+	width: 1024px;
+	height: 768px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.ipad_page p,
+.ipad_page h2{
+	margin-left: 20px;
+}
+.wheel{
+	margin: 0 auto;
+	width: 500px;
+	height: 500px;
+}
+.wheel img{
+	height: 100%;
+	width: 100%;
+}
