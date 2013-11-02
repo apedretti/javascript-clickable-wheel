@@ -255,7 +255,7 @@ function Wheel(param_img){
 			return false;
 		}
 	});
-	$(document).on("vmousedown", function(event){
+	$(divHandler).on("vmousedown", function(event){
 		//console.log("vmousedown");
 		if (wheel.inside(event.pageX, event.pageY)){
 
