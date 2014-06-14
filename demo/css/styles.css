@@ -9,10 +9,14 @@ body{
 ul,ol,p{
 	margin: 0; padding: 0;
 }
+ul li{
+	list-style-type: none;
+}
 a{
 	outline: 0 none;
 	text-decoration: none;
 }
+
 /***************************
 Generals
 ********/		
@@ -36,6 +40,19 @@ Generals
 Site
 **********/
 body{
+	font-family: arial;
+}
+h1{
+	font-size: 40px;
+	text-align: center;
+}
+h4{
+	margin-bottom: 7px;
+	font-weight: normal;
+}
+a{
+	font-weight: normal;
+	font-size: 14px;
 }
 /***************************
 Screen: Wheels
@@ -46,15 +63,21 @@ div.ui-page{
 .ui-mobile [data-role=page]{
 	position: static;
 }
-.ipad_page{
-	background: white url('../images/pattern.gif') repeat;
-	width: 1024px;
-	height: 768px;
+.content{
+	max-width: 1024px;
 	margin: 0 auto;
+}
+.ipad_page{
+	background: transparent url('../images/landscape.png') no-repeat center center;
+	max-width: 1028px;
+	min-width: 934px;
+	height: 700px;
+	margin: 0 auto;
+	padding: 130px 4% 22px;
 	overflow: hidden;
 }
 .ipad_page p,
-.ipad_page h2{
+.ipad_page h3{
 	margin-left: 20px;
 }
 .wheel{
