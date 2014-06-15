@@ -11,7 +11,7 @@ http://alejandropedretti.com/blog-en/jquery-clickable-fortune-wheel-menu/
 
 And here's the demo:
 
-http://code.alejandropedretti.com.ar/jquery-clickable-wheel-menu/
+http://code.alejandropedretti.com/jquery-clickable-wheel-menu/
 
 
 
