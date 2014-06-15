@@ -1,7 +1,8 @@
 Javascript Clickable Wheel
 ==========================
 
-Clickable Wheel Menu made using JavaScript (+ jQuery) and CSS3 properties. Compatible with PCs and tablets (I've tested it on an iPad).
+Clickable Wheel Menu made using JavaScript (+ jQuery) and CSS3 properties. Compatible with PCs and tablets (tested on an iPad 2).
+
 
 Here's the explaining post:
 
