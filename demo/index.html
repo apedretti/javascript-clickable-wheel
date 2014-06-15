@@ -23,9 +23,9 @@
 	<div class="content">
 		<h1>jQuery Clickable Wheel Menu</h1>
 		<br />
-		<p>Clickable Wheel Menu made using JavaScript (+ jQuery) and CSS3 properties. Compatible with <b>PCs and tablets</b> (I've tested it on an iPad).</p>
+		<p>Clickable Wheel Menu made using JavaScript (+ jQuery) and CSS3 properties. Compatible with <b>PCs and tablets</b> (tested on an iPad 2).</p>
 		<br />
-		<h4>As seen on:</h4>
+		<h4>Useful links:</h4>
 		<ul>
 			<li><a href="http://alejandropedretti.com/blog-en/jquery-clickable-fortune-wheel-menu/" target="_blank">Explaining post.</a></li>
 			<li><a href="https://github.com/apedretti/javascript-clickable-wheel/" target="_blank">GitHub Repository.</a></li>
@@ -34,6 +34,8 @@
 		<h4>Examples:</h4>
 		<ul>
 			<li><a href="#ex-basic-usage">Basic usage.</a></li>
+			<li><a href="#ex-separate-wheels">Two separate wheels.</a></li>
+			<li><a href="#ex-concentric-wheels">Two concentric wheels.</a></li>
 		</ul>
 		<br /><br />
 	</div>
@@ -42,12 +44,72 @@
 	<div class="ipad_page" id="ex-basic-usage" name="ex-basic-usage">
 		<br />
 		<h3>Basic usage: one wheel</h3>
-		<div class="wheel">
-			<img src="images/wheel_preview.png" 
+		<div class="wheel"  
 				data-folder="images/wheel"
 				data-buttons="4"
 				data-background="yes"
-				data-over="yes" />
+				data-over="yes" >
+			<img src="images/wheel_preview.png" />
+			<a data-button="0" href="#" onclick="alert('Great, you have just clicked me.');return false"></a>
+			<a data-button="1" href="#" onclick="alert('This is the ' + this.getAttribute('data-button') + ' button.');return false"></a>
+			<a data-button="2" href="#" onclick="alert('Yet another message.');return false"></a>
+			<a data-button="3" href="#" onclick="alert('And another.');return false"></a>
+		</div>	
+	</div>
+	
+	<br /><br />
+	
+	<div class="ipad_page" id="ex-separate-wheels" name="ex-separate-wheels">
+		<br />
+		<br />
+		<h3>Two separate wheels</h3>
+		<div class="wheel" 
+				data-folder="images/wheel"
+				data-buttons="4"
+				data-background="yes"
+				data-over="yes">
+			<img src="images/wheel_preview.png" />
+			<a data-button="0" href="#" onclick="console.log('Great, you have just clicked me.');return false"></a>
+			<a data-button="1" href="#" onclick="console.log('This is the ' + this.getAttribute('data-button') + ' button.');return false"></a>
+			<a data-button="2" href="#" onclick="console.log('Yet another message.');return false"></a>
+			<a data-button="3" href="#" onclick="console.log('And another.');return false"></a>
+		</div>	
+		<div class="wheel" 
+				data-folder="images/wheel"
+				data-buttons="4"
+				data-background="yes"
+				data-over="yes" > 
+			<img src="images/wheel_preview.png"  />
+			<a data-button="0" href="#" onclick="alert('Great, you have just clicked me.');return false"></a>
+			<a data-button="1" href="#" onclick="alert('This is the ' + this.getAttribute('data-button') + ' button.');return false"></a>
+			<a data-button="2" href="#" onclick="alert('Yet another message.');return false"></a>
+			<a data-button="3" href="#" onclick="alert('And another.');return false"></a>
+		</div>	
+	</div>
+
+	<br /><br />
+	
+	<div class="ipad_page" id="ex-concentric-wheels" name="ex-concentric-wheels">
+		<br />
+		<br />
+		<h3>Two concentric wheels</h3>
+		<div id="wheel_big" class="wheel" 
+				data-folder="images/wheel"
+				data-buttons="4"
+				data-background="yes"
+				data-over="no">
+			<img src="images/wheel_preview.png" />
+			<a data-button="0" href="#" onclick="console.log('Great, you have just clicked me.');return false"></a>
+			<a data-button="1" href="#" onclick="console.log('This is the ' + this.getAttribute('data-button') + ' button.');return false"></a>
+			<a data-button="2" href="#" onclick="console.log('Yet another message.');return false"></a>
+			<a data-button="3" href="#" onclick="console.log('And another.');return false"></a>
+		</div>	
+		<div id="wheel_small" class="wheel" 
+				data-folder="images/wheel"
+				data-buttons="4"
+				data-background="yes"
+				data-over="yes" > 
+			<img src="images/wheel_preview.png"  />
 			<a data-button="0" href="#" onclick="alert('Great, you have just clicked me.');return false"></a>
 			<a data-button="1" href="#" onclick="alert('This is the ' + this.getAttribute('data-button') + ' button.');return false"></a>
 			<a data-button="2" href="#" onclick="alert('Yet another message.');return false"></a>
@@ -61,7 +123,7 @@
 	});
 
 	$(document).ready(function(){
-		Wheel.init(".wheel img");
+		Wheel.init(".wheel");
 	});
 
 </script>

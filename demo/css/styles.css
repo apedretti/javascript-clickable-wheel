@@ -89,3 +89,31 @@ div.ui-page{
 	height: 100%;
 	width: 100%;
 }
+#ex-separate-wheels .wheel{
+	width: 350px;
+	height: 350px;
+	float: left;
+	margin-left: 100px;
+}
+#ex-concentric-wheels{
+	position: relative;
+}
+#ex-concentric-wheels #wheel_big{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 600px;
+	height: 600px;
+	margin-left: -300px;
+	margin-top: -250px;
+}
+#ex-concentric-wheels #wheel_small{
+	position: absolute;
+	z-index: 5;
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	height: 300px;
+	margin-left: -150px;
+	margin-top: -100px;
+}

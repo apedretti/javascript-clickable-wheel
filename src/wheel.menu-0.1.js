@@ -69,13 +69,15 @@ Wheel.init = function(selector, config){
 
 	jQuery.extend(Wheel.config, config);
 	
-	var elem = $(selector);
-	if (elem.length < 1){
+	if (typeof(selector) == 'string'){
+		selector = $(selector);
+	}
+	if (selector.length < 1){
 		return false;
 	}
 	
-	elem.each(function(){
-		var w = new Wheel($(this));
+	selector.each(function(){
+		var w = new Wheel(this);
 		if (Wheel.config.centerInButton){
 			w.centerInCurrentButton(0);
 		}
@@ -116,26 +118,27 @@ Wheel.round = function(num, decimals){
 /********************************
 CLASS Wheel
 *****************/
-function Wheel(param_img){
+function Wheel(rawdiv){
 
-	if (param_img instanceof jQuery){
-		img = param_img[0];
+	if (rawdiv instanceof jQuery){
+		rawdiv = rawdiv[0];
 	}
 
 	//Creating Wrapper
 	var wrapper = document.createElement("div");
 	wrapper.className = "wm_container wm_hide";
 	wrapper.id = "wm_" + Wheel.getNextId();
-	var imgHeight = img.height == 0 ? img.width : img.height;
-	var imgWidth = img.width;
+	var previewImage = rawdiv.getElementsByTagName('img');
+	previewImage = previewImage[0];
+	var imgHeight = previewImage.height == 0 ? previewImage.width : previewImage.height;
+	var imgWidth = previewImage.width;
 	wrapper.style.height = imgHeight + "px";
 	wrapper.style.width = imgWidth + "px";
 	this.wrapperId = wrapper.id;
 	this.elem = $(wrapper);
-	//console.log(img);
-	img.parentNode.insertBefore(wrapper, img.nextSibling);
+	previewImage.parentNode.insertBefore(wrapper, previewImage.nextSibling);
 
-	var folderName = img.getAttribute("data-folder");
+	var folderName = rawdiv.getAttribute("data-folder");
 	
 	//Creating the wheel	
 	var imgWheel = document.createElement("img");
@@ -146,7 +149,7 @@ function Wheel(param_img){
 	this.image = $(imgWheel);
 
 	//Creating the shadow	
-	this.hasBackground = img.getAttribute("data-background");
+	this.hasBackground = rawdiv.getAttribute("data-background");
 	this.hasBackground = this.hasBackground != null && this.hasBackground == "yes";
 	if (this.hasBackground){
 		var imgShadow = document.createElement("img");
@@ -157,7 +160,7 @@ function Wheel(param_img){
 	}
 
 	//Creating the over layer
-	this.hasOver = img.getAttribute("data-over");
+	this.hasOver = rawdiv.getAttribute("data-over");
 	this.hasOver = this.hasOver != null && this.hasOver == "yes";
 	if (this.hasOver){
 		var imgOver = document.createElement("img");
@@ -175,11 +178,11 @@ function Wheel(param_img){
 	
 	
 	//Creating the buttons (if any)
-	this.buttonsLength = img.getAttribute("data-buttons");
+	this.buttonsLength = rawdiv.getAttribute("data-buttons");
 	//this.hasButtons = this.buttons != null && this.buttons.length > 0;
 	this.hasButtons = this.buttonsLength != null && this.buttonsLength > 0;
 	if (this.hasButtons){
-		this.buttons = img.parentNode.getElementsByTagName("a")
+		this.buttons = previewImage.parentNode.getElementsByTagName("a")
 		this.buttonAngle = 0;
 		var imgButton;
 		//console.log(this.buttons);
@@ -205,8 +208,8 @@ function Wheel(param_img){
 	if (this.hasOver) wrapper.appendChild(imgOver);
 	wrapper.appendChild(divHandler);
 
-	//Making visible the wrapper (and invisible the param_img)
-	param_img.hide();
+	//Making visible the wrapper (and invisible the previewImage)
+	$(previewImage).hide();
 	this.elem.removeClass("wm_hide");
 	
 	//Defaults
@@ -244,7 +247,7 @@ function Wheel(param_img){
 
 	var wheel = this;
 	
-	//Killing the events that clicking a img might fire
+	//Killing the events that clicking an img might fire
 	this.elem.find("img").on("dragstart", function(){ 
 		return false; 
 	});
@@ -307,11 +310,10 @@ function Wheel(param_img){
 			wheel.elem.removeClass("touched");
 			wheel.speedSamples = new Array(Wheel.config.speedSamplesLength);
 			
-			var justClicking = wheel.buttonShouldClick();
+			var justClicking = wheel.buttonShouldClick(event);
 			if (!justClicking){
 				if (wheel.selectedButton > -1){
 					wheel.buttonDeselect();
-					wheel.buttonClick();			
 				}
 			}
 			clearTimeout(wheel.timeout);
@@ -469,8 +471,12 @@ Wheel.prototype.resetLastButtonAngleTime = function(){
 	this.lastButtonAngleTime = d.getTime(); 
 };
 
-Wheel.prototype.buttonShouldClick = function(){
+Wheel.prototype.buttonShouldClick = function(event){
 	//console.log("buttonShouldClick");
+	
+	//Validating that the user is left-clicking
+	if (event == undefined || event.which != 1) return;
+
 	var d = new Date();
 	var t = d.getTime();
 	if (this.startingTouchingTime + Wheel.config.buttonClickingTreshold > t){
@@ -530,8 +536,6 @@ Wheel.prototype.buttonDeselect = function(){
 
 Wheel.prototype.buttonClick = function(){
 	
-	//console.log("buttonClick");
-	
 	//Getting button
 	var clickedButton = this.buttonCurrent();
 	clickedButton = this.elem.find("#"+this.wrapperId+"_button_"+clickedButton);
@@ -539,7 +543,12 @@ Wheel.prototype.buttonClick = function(){
 	//Firing either 'href' attribute if setted, or the click delegate attached if not
 	var buttonHref = clickedButton.attr('href');
 	if (buttonHref != undefined && buttonHref != '#'){
-		window.location.href = buttonHref;
+		if (clickedButton.attr('target') == '_blank'){
+			window.open(buttonHref);			
+		}
+		else{
+			window.location.href = buttonHref;
+		}
 	}
 	else{
 		clickedButton.click();
