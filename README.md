@@ -6,7 +6,7 @@ Clickable Wheel Menu made using JavaScript (+ jQuery) and CSS3 properties. Compa
 
 Here's the explaining post:
 
-http://alejandropedretti.com.ar/blog-en/jquery-clickable-fortune-wheel-menu/
+http://alejandropedretti.com/blog-en/jquery-clickable-fortune-wheel-menu/
 
 
 And here's the demo:
